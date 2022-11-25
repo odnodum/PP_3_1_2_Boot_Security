@@ -27,7 +27,7 @@ public class MyUserService implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
+    public List<User> findAllUsers() {
         return userRepository.findAll();
     }
 
@@ -48,7 +48,7 @@ public class MyUserService implements UserDetailsService {
     }
 
     @Transactional
-    public void delete(int id){
+    public void deleteUser(int id){
         userRepository.deleteById(id);
     }
 
@@ -56,19 +56,19 @@ public class MyUserService implements UserDetailsService {
         return roles.stream().map(r -> new SimpleGrantedAuthority(r.getName())).collect(Collectors.toList());
     }
 
-    public User findOne(int id) {
+    public User findOneUser(int id) {
         Optional<User> foundUser = userRepository.findById(id);
         return foundUser.orElse(null);
     }
 
     @Transactional
-    public void save(User user) {
+    public void saveUser(User user) {
         userRepository.save(user);
     }
 
 
     @Transactional
-    public void update(int id, User updatedUser) {
+    public void updateUser(int id, User updatedUser) {
         updatedUser.setId(id);
         userRepository.save(updatedUser);
     }
